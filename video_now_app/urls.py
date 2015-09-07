@@ -12,7 +12,7 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
     url(r'^videos/$', 'videos.views.category_list', name='video_list'),
     url(r'^videos/(?P<cat_slug>[\w-]+)/$', 'videos.views.category_detail', name='category_detail'),
-    url(r'^videos/(?P<cat_slug>[\w-]+)/(?P<id>\d+)/$', 'videos.views.video_detail', name='video_detail'),
+    url(r'^videos/(?P<cat_slug>[\w-]+)/(?P<vid_slug>[\w-]+)/$', 'videos.views.video_detail', name='video_detail'),
     url(r'^admin/', include(admin.site.urls)),
 )
 

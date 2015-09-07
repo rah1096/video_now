@@ -24,6 +24,7 @@ class Video(models.Model):
     title = models.CharField(max_length=120)
     embed_code = models.CharField(max_length=500, null=True, blank=True)
     active = models.BooleanField(default=True)
+    slug = models.SlugField(null=True, blank=True)
     featured = models.BooleanField(default=False)
     free_preview = models.BooleanField(default=False)
     category = models.ForeignKey("Category", default=1)
@@ -32,11 +33,14 @@ class Video(models.Model):
 
     objects = VideoManager()
 
+    class Meta:
+        unique_together = ('slug', 'category')
+
     def __unicode__(self):
         return self.title
 
     def get_absolute_url(self):
-        return reverse("video_detail", kwargs={"id": self.id, "cat_slug": self.category.slug})
+        return reverse("video_detail", kwargs={"vid_slug": self.slug, "cat_slug": self.category.slug})
 
 
 class Category(models.Model):
