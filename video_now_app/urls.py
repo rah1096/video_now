@@ -10,8 +10,9 @@ urlpatterns = patterns('',
     url(r'^$', 'video_now_app.views.home', name='home'),
     url(r'^staff/$', 'video_now_app.views.staff_home', name='staff'),
     # url(r'^blog/', include('blog.urls')),
-    url(r'^videos/$', 'videos.views.video_list', name='video_list'),
-    url(r'^videos/(?P<id>\d+)/$', 'videos.views.video_detail', name='video_detail'),
+    url(r'^videos/$', 'videos.views.category_list', name='video_list'),
+    url(r'^videos/(?P<cat_slug>[\w-]+)/$', 'videos.views.category_detail', name='category_detail'),
+    url(r'^videos/(?P<cat_slug>[\w-]+)/(?P<id>\d+)/$', 'videos.views.video_detail', name='video_detail'),
     url(r'^admin/', include(admin.site.urls)),
 )
 
