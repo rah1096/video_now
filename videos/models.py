@@ -1,3 +1,6 @@
+import urllib2
+
+from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models.signals import post_save
@@ -23,9 +26,15 @@ class VideoManager(models.Model):
         return self.get_queryset().active()
 
 
+DEFAULT_MESSAGE = """
+Check out this awesome video.
+"""
+
+
 class Video(models.Model):
     title = models.CharField(max_length=120)
     embed_code = models.CharField(max_length=500, null=True, blank=True)
+    share_message = models.TextField(default=DEFAULT_MESSAGE)
     active = models.BooleanField(default=True)
     slug = models.SlugField(null=True, blank=True)
     featured = models.BooleanField(default=False)
@@ -44,6 +53,14 @@ class Video(models.Model):
 
     def get_absolute_url(self):
         return reverse("video_detail", kwargs={"vid_slug": self.slug, "cat_slug": self.category.slug})
+
+    def get_share_link(self):
+        full_url = "%s%s" %(settings.FULL_DOMAIN_NAME, self.get_absolute_url())
+        return full_url
+
+    def get_share_message(self):
+        full_url = "%s%s" %(settings.FULL_DOMAIN_NAME, self.get_absolute_url())
+        return urllib2.quote("%s %s" %(self.share_message, full_url))
 
 
 def video_post_save_receiver(sender, instance, created, *args, **kwargs):

@@ -14,7 +14,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
-LOGIN_URL = "/login"
 
 
 # Quick-start development settings - unsuitable for production
@@ -29,6 +28,9 @@ DEBUG = True
 TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
+FULL_DOMAIN_NAME = 'http://www.timchen.rocks'
+
+LOGIN_URL = "/login"
 
 
 # Application definition
