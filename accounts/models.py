@@ -24,7 +24,7 @@ class MyUserManager(BaseUserManager):
         """
         Creates and saves a superuser with the given username, email and password.
         """
-        user = self.create_user(username=username, email=Email, password=password,)
+        user = self.create_user(username=username, email=email, password=password,)
         user.is_admin = True
         user.save(using=self._db)
         return user
@@ -70,3 +70,12 @@ class MyUser(AbstractBaseUser):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
         return self.is_admin
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(MyUser)
+    bio = models.TextField(null=True, blank=True)
+    facebook_link = models.CharField(max_length=320, null=True, blank=True, verbose_name='Facebook profile url')
+    twitter_link = models.CharField(max_length=320, null=True, blank=True, verbose_name='Twitter handle')
+
+    def __unicode__(self):
+        return self.user.username

@@ -32,7 +32,7 @@ FULL_DOMAIN_NAME = 'http://www.timchen.rocks'
 
 LOGIN_URL = "/login"
 
-
+AUTH_USER_MODEL = 'accounts.MyUser'
 # Application definition
 
 INSTALLED_APPS = (
