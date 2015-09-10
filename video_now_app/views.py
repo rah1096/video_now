@@ -1,9 +1,10 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, HttpResponseRedirect, redirect
 from django.utils.safestring import mark_safe
 
 from accounts.forms import RegistrationForm
+from accounts.models import MyUser
 from videos.models import Video
 
 from .forms import LoginForm
@@ -19,22 +20,34 @@ def home(request):
         username = form.cleaned_data['username']
         email = form.cleaned_data['email']
         password = form.cleaned_data['password2']
-        print username, email, password
+        # MyUser.objects.create_user(username=username, email=email, password=password)
+        new_user = MyUser()
+        new_user.username = username
+        new_user.email = email
+        # new_user.password = password #WRONG
+        new_user.set_password(password) #RIGHT
+        new_user.save()
 
-    name = "Tim"
-    videos = Video.objects.all()
-    embeds = []
-    for vid in videos:
-        code = mark_safe(vid.embed_code)
-        embeds.append("%s" %(code))
+        #ADD MESSAGE fpr success.
+        return redirect('login')
+        #return HttpResponseRedirect(reverse('login'))
+
+    # name = "Tim"
+    # videos = Video.objects.all()
+    # embeds = []
+    # for vid in videos:
+    #     code = mark_safe(vid.embed_code)
+    #     embeds.append("%s" %(code))
 
     context = {
         "form": form,
-        "the_name": name,
-        "number": videos.count(),
-        "videos": videos,
-        "embeds": embeds,
-        "a_code": videos[0].embed_code
+        "action_value": "/",
+        "submit_btn_value": "Register",
+    #     "the_name": name,
+    #     "number": videos.count(),
+    #     "videos": videos,
+    #     "embeds": embeds,
+    #     "a_code": videos[0].embed_code
     }
     return render(request, "home.html", context)
 
