@@ -17,7 +17,7 @@ urlpatterns = patterns('',
 )
 
 #auth login/logout
-urlpatterns += patterns('video_now_app.views',
+urlpatterns += patterns('accounts.views',
     url(r'^login/$', 'auth_login', name='login'),
     url(r'^logout/$', 'auth_logout', name='logout'),
 )
