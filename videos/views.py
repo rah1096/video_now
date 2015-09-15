@@ -12,7 +12,7 @@ def video_detail(request, cat_slug, vid_slug):
         raise Http404
     try:
         obj = Video.objects.get(slug=vid_slug)
-        return render(request, "videos/video_detail.html", {"obj": obj})
+        return render(request, "videos/category_detail.html", {"obj": obj})
     except:
         raise Http404
 
