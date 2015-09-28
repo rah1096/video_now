@@ -37,11 +37,11 @@ h1 {
 
 </br>
 <h1>Mark Safe</h1>
-    {{ a_code|safe }}
+    {{ a_code }}
 
 </br>
 <h1>Embeds</h1>
-{% for embed in embeds %}
+{% for embed in the_embeds %}
 {{ embed|safe }}
 {% endfor %}
 

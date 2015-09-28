@@ -53,5 +53,26 @@ title={{ obj.get_share_message|safe }}
 <i class="fa fa-linkedin-square fa-3x"></i>
 </a>
 
+<br/>
+<hr/>
+
+<div class="row">
+<div class="col-sm-12">
+<h1>Comments/Questions</h1>
+
+<form method="POST" action="">{% csrf_token %}
+    {{ comment_form.as_p }}
+    <input type="submit" value="Add comment" />
+</form>
+    
+{% for comment in comments %}
+
+    {{ comment.get_comment }}
+
+{% endfor %}
+
+</div>
+</div>
+
 <!--{{ obj.get_share_link|safe }}-->
 {% endblock %}

@@ -32,15 +32,16 @@ def home(request):
     # name = "Tim"
     # videos = Video.objects.all()
     # embeds = []
+
     # for vid in videos:
     #     code = mark_safe(vid.embed_code)
     #     embeds.append("%s" %(code))
 
     context = {
         "form": form,
-        "action_value": "/",
+        "action_value": "",
         "submit_btn_value": "Register",
-    #     "the_name": name,
+        # "the_name": name,
     #     "number": videos.count(),
     #     "videos": videos,
     #     "embeds": embeds,
@@ -55,7 +56,7 @@ def staff_home(request):
     context = {
 
     }
-    return render(request, "home.html", context)
+    return render(request, "form.html", context)
 
 
 

@@ -120,6 +120,3 @@ TEMPLATE_DIRS = (
 
 
 
-
-
-
